@@ -41,5 +41,4 @@
   /*:-ms-input-placeholder { !* Internet Explorer 10+ *!*/
     /*color: #fff;*/
   /*}*/
-  /*奥术大师多撒多撒多撒大所大叔大婶多撒多*/
 </style>
