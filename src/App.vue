@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-
     <Row class="header_view">
       <Col span="24">
       <v-header></v-header>
       <router-view></router-view>
+      <v-footer></v-footer>
       </Col>
     </Row>
   </div>

@@ -1,31 +1,30 @@
 <template>
 <div class="title">
-  <Menu mode="horizontal"  active-name="1">
+  <Menu mode="horizontal"  active-name="1" @on-select="jumpToPage">
     <div class="layout-logo"></div>
-    <MenuItem name="1">
+    <MenuItem name="index">
       首页
     </MenuItem>
-    <MenuItem name="2" class="pro">
+    <MenuItem name="product" class="pro">
      产品
     </MenuItem>
-    <MenuItem name="3">
+    <MenuItem name="solution">
      解决方案
     </MenuItem>
-    <MenuItem name="4">
+    <MenuItem name="example">
      案例
     </MenuItem>
-    <MenuItem name="5">
+    <MenuItem name="datareport">
      数据报告
     </MenuItem>
-    <MenuItem name="6">
-     大数据学院
+    <MenuItem name="sendmsg">
+   留言
     </MenuItem>
-    <MenuItem name="7">
+    <MenuItem name="aboutus">
      关于我们
     </MenuItem>
-    <MenuItem name="8" class="login">
-      <router-link to="/login">登录</router-link>
-      <router-link to="/register">注册</router-link>
+    <MenuItem name="login" class="login">
+  登录
     </MenuItem>
     <MenuItem name="9" class="search">
 <i class="iconfont icon-icon_search"></i>
@@ -43,6 +42,13 @@
           return {
 
           }
+    },
+    methods:{
+//        跳转页面
+      jumpToPage(route){
+          var self=this;
+          self.$router.push({name:route})
+      }
     }
   }
 </script>
