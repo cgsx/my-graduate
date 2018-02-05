@@ -2,12 +2,12 @@
 <div class="footer">
 <ul class="cl">
   <li><router-link to="/index">首页</router-link></li>
-  <li><router-link to="/index">产品</router-link></li>
-  <li><router-link to="/index">解决方案</router-link></li>
-  <li><router-link to="/index">案例</router-link></li>
-  <li><router-link to="/index">数据报告</router-link></li>
-  <li><router-link to="/index">留言</router-link></li>
-  <li><router-link to="/index">关于我们</router-link></li>
+  <li><router-link to="/product">产品</router-link></li>
+  <li><router-link to="/solution">解决方案</router-link></li>
+  <li><router-link to="/example">案例</router-link></li>
+  <li><router-link to="/datareport">数据报告</router-link></li>
+  <li><router-link to="/sendmsg">留言</router-link></li>
+  <li><router-link to="/aboutus">关于我们</router-link></li>
   <li>sangefenxiang</li>
 </ul>
   <p class="cl beian">
@@ -48,8 +48,12 @@
     float: left;
 line-height: 100px;
     padding: 0 20px;
+    color: white;
     font-size: 16px;
   }
+.footer ul li:not(:last-child) a{
+  color: white;
+}
 .footer ul li:last-child{
     float: right;
 line-height: 100px;

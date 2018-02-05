@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 Vue.use(Router);
-import Index from '@/components/index/index'
+import index from '@/components/index/index'
 import  Header from '@/components/header/header'
 import  product from '@/components/product/product'
 import  NotFound from '@/components/header/404'
@@ -12,6 +12,7 @@ import  datareport from '@/components/datareport/datareport'
 import  sendmsg from '@/components/sendmsg/sendmsg'
 import  footer from '@/components/header/footer'
 import  aboutus from '@/components/aboutus/aboutus'
+import  login from '@/components/login/login'
 
 Vue.component("v-header",Header);
 Vue.component("v-footer",footer);
@@ -24,13 +25,12 @@ export default new Router({
     // },
     {
       path: '/',
-      name: 'index',
-      component: Index
+      component: index
     },
     {
       path: '/index',
       name: 'index',
-      component: Index
+      component: index
     },
     {
       path: '/header',
@@ -71,6 +71,11 @@ export default new Router({
       path: '/aboutus',
       name: 'aboutus',
       component: aboutus
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
     },
     {
       path: '*',

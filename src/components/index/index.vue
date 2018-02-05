@@ -1,17 +1,14 @@
 <template>
   <p>
-    <img src="../../assets/images/20160812150653_13226.jpg"/>
+    <video src="../../assets/images/banner.mp4" width="100%" loop autoplay></video>
     <span>zheshishouye</span>
   </p>
-</template>
+  </template>
 <script>
 export default{
 
 }
 </script>
 <style scoped>
-img{
-  width: 100%;
-}
 
 </style>
