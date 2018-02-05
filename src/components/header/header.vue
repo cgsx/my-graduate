@@ -1,7 +1,9 @@
 <template>
 <div class="title">
   <Menu mode="horizontal"  active-name="1" @on-select="jumpToPage">
-    <div class="layout-logo"></div>
+    <div class="layout-logo">
+      <img src="../../assets/images/logo.png" />
+    </div>
     <MenuItem name="index">
       首页
     </MenuItem>
@@ -27,7 +29,7 @@
   登录
     </MenuItem>
     <MenuItem name="9" class="search">
-<i class="iconfont icon-icon_search"></i>
+<i class="iconfont icon-sousuo"></i>
     </MenuItem>
   </Menu>
   <div class="showProDetail">
@@ -80,15 +82,19 @@
   border-right: 1px solid white;
 }
 .layout-logo{
-  width: 100px;
-  height: 30px;
-  background: #5b6270;
+  width: 150px;
+  height: 50px;
+  /*background: #5b6270;*/
   border-radius: 3px;
   float: left;
   margin-right: 100px;
   position: relative;
-  top: 15px;
+  top: 0px;
   left: 20px;
+}
+.layout-logo img{
+  width: 100%;
+  height: 100%;
 }
   .title .ivu-menu-light{
     background: none;

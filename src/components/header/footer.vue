@@ -8,7 +8,11 @@
   <li><router-link to="/datareport">数据报告</router-link></li>
   <li><router-link to="/sendmsg">留言</router-link></li>
   <li><router-link to="/aboutus">关于我们</router-link></li>
-  <li>sangefenxiang</li>
+  <li class="share">
+    <i class="iconfont icon-weixin"></i>
+    <i class="iconfont icon-weibo"></i>
+    <i class="iconfont icon-qq-copy"></i>
+  </li>
 </ul>
   <p class="cl beian">
     <span class="fl">
@@ -43,6 +47,11 @@
 }
 .footer ul{
   margin-left: 100px;
+}
+.share i{
+  font-size: 24px;
+  color: white;
+
 }
   .footer ul li:not(:last-child){
     float: left;
