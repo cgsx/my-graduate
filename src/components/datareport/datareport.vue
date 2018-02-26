@@ -1,5 +1,37 @@
 <template>
-<h2>  这是数据报告</h2>
+  <div class="productTitle">
+    <img src="../../assets/images/30eab463-057f-4972-84f3-20ec27ab1eaf.png"/>
+    <div class="titleText">
+      <h1>数据报告</h1>
+    </div>
+    <div class="dataReport clearfix">
+        <div class="card">
+          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
+          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
+          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
+        </div>
+        <div class="card">
+          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
+          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
+          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
+        </div>
+        <div class="card">
+          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
+          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
+          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
+        </div>
+        <div class="card">
+          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
+          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
+          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
+        </div>
+      <div class="card">
+          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
+          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
+          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
+        </div>
+    </div>
+    </div>
 </template>
 <script>
   export default {
@@ -11,6 +43,50 @@
     }
   }
 </script>
-<style >
+<style scoped>
+  .card{
+    width: 23%;
+    text-align: center;
+    float: left;
+  }
+  .card:hover{
+    box-shadow: 0px 0 5px 2px #aaa;
 
+  }
+  .cardTitle{
+    font-size: 20px;
+    color: #000000;
+  }
+  .card p{
+    padding: 10px;
+  }
+  .card img{
+    margin-top: 10px;
+    width: 80%;
+    height: auto;
+  }
+  .dataReport{
+    padding: 50px;
+  }
+  .productTitle{
+    position: relative;
+  }
+  .productTitle>img{
+    width: 100%;
+  }
+  .titleText{
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 100px;
+    color: white;
+    padding: 15px 0;
+    background: rgba(0,0,0,.6);
+  }
+  .titleText h1{
+    font-size: 36px;
+  }
+  .titleText p{
+    margin-top: 20px;
+  }
 </style>

@@ -292,6 +292,9 @@ padding: 0 20px 10px 20px;
   top: 0;
 
 }
+.productTitle>img{
+  width: auto;
+}
 .solution .decision:hover>h1{
 display: none;
 
