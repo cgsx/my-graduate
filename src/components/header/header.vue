@@ -33,16 +33,59 @@
         <MenuItem name="joinus">加入我们</MenuItem>
         <MenuItem name="contachus">联系我们</MenuItem>
       </Submenu>
-    <MenuItem name="login" class="login">
-  登录
-    </MenuItem>
-    <MenuItem name="9" class="search">
-<i class="iconfont icon-sousuo"></i>
-    </MenuItem>
   </Menu>
-  <div class="showProDetail">
-
+  <div class="searchAndLogin">
+      <span class="login" @click="login=true">
+          登录
+      </span>
+    <span class="search ">
+        <i class="iconfont icon-sousuo"></i>
+      </span>
   </div>
+  <Modal
+    title="登录"
+    v-model="login"
+    :mask-closable="false"
+  class="loginModal"
+    width="300">
+    <p class="inputMSg">
+      <Input v-model="username">
+      <span slot="prepend">用户名：</span>
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="pwd">
+      <span slot="prepend">密码：</span>
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg">
+      <span slot="prepend">验证码：</span>
+      <span slot="append">验证码</span>
+      </Input>
+    </p>
+    <p slot="footer">
+
+    </p>
+  </Modal>
+  <Modal
+    title="注册"
+    v-model="register"
+    :mask-closable="false"
+  width="300">
+    <p>Content of dialog</p>
+    <p>Content of dialog</p>
+    <p>Content of dialog</p>
+  </Modal>
+  <Modal
+    title="重置密码"
+    v-model="restpwd"
+    :mask-closable="false"
+    width="300">
+    <p>Content of dialog</p>
+    <p>Content of dialog</p>
+    <p>Content of dialog</p>
+  </Modal>
 </div>
 </template>
 <script>
@@ -50,7 +93,12 @@
       name:'headers',
     data(){
           return {
-
+            login:false,
+            register:false,
+            restpwd:false,
+            username:'',
+            pwd:'',
+            msg:''
           }
     },
     methods:{
@@ -63,6 +111,43 @@
   }
 </script>
 <style >
+  .inputMSg{
+  height: 50px;
+  }
+  .searchAndLogin{
+    position: absolute;
+    top: 0;
+    right: 100px;
+    width: 300px;
+    height: 60px;
+    z-index: 901;
+
+  }
+  .loginModal .ivu-modal-header{
+     border-bottom: none;
+    color: white;
+
+    text-align: center;
+  }
+  .loginModal .ivu-modal-footer{
+    border-top: none;
+  }
+  .loginModal  .ivu-modal-header .ivu-modal-header-inner{
+    color: white;
+  }
+  .loginModal .ivu-modal-content{
+    color: white;
+    background-color: rgba(12, 23, 43, 0.46);
+  }
+  .searchAndLogin>span{
+    display: inline-block;
+    height: 60px ;
+    width: 100px;
+    text-align: center;
+    line-height: 60px;
+    color: white;
+    cursor: pointer;
+  }
 .title{
   width: 100%;
   height: 80px;
@@ -71,6 +156,7 @@
 }
 .login{
   margin-left: 20%;
+  height: 60px;
   border-right: 1px solid white;
   border-left: 1px solid white;
 }
