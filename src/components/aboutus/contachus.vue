@@ -2,10 +2,9 @@
   <div class="productTitle">
     <img src="../../assets/images/product.png"/>
     <div class="titleText">
-      <h1>关于我们</h1>
-
+      <h1>联系我们</h1>
     </div>
-    </div>
+  </div>
 </template>
 <script>
   export default {

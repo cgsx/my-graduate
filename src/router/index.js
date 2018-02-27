@@ -13,7 +13,11 @@ import  sendmsg from '@/components/sendmsg/sendmsg'
 import  footer from '@/components/header/footer'
 import  aboutus from '@/components/aboutus/aboutus'
 import  login from '@/components/login/login'
-
+import commit from '@/components/aboutus/commit'
+import contachus from '@/components/aboutus/contachus'
+import dynamics from '@/components/aboutus/dynamics'
+import joinus from '@/components/aboutus/joinus'
+import team from '@/components/aboutus/team'
 Vue.component("v-header",Header);
 Vue.component("v-footer",footer);
 export default new Router({
@@ -31,6 +35,26 @@ export default new Router({
       path: '/index',
       name: 'index',
       component: index
+    },   {
+      path: '/commit',
+      name: 'commit',
+      component: commit
+    },  {
+      path: '/contachus',
+      name: 'contachus',
+      component: contachus
+    },  {
+      path: '/dynamics',
+      name: 'dynamics',
+      component: dynamics
+    },  {
+      path: '/joinus',
+      name: 'joinus',
+      component: joinus
+    },  {
+      path: '/team',
+      name: 'team',
+      component: team
     },
     {
       path: '/header',

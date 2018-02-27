@@ -166,13 +166,13 @@ margin: 10px 100px  10px 10px;
 margin-top: 100px;
 
   }
-  .exampleNav .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu{
+  .exampleNav .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item, .exampleNav .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu{
     color:#000000;
     border-bottom: 0;
     transition: all .5s linear;
     font-size: 20px;
   }
-  .exampleNav .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item-active, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item:hover, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu-active, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu:hover{
+  .exampleNav .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item-active, .exampleNav .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item:hover, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu-active, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu:hover{
     color: #E02D39;
     border-bottom: 2px solid #E02D39;
   }

@@ -1,6 +1,6 @@
 <template>
 <div class="title">
-  <Menu mode="horizontal"  active-name="1" @on-select="jumpToPage">
+  <Menu mode="horizontal"  active-name="1" @on-select="jumpToPage" class="titleone">
     <div class="layout-logo">
       <img src="../../assets/images/logo.png" />
     </div>
@@ -22,9 +22,17 @@
     <MenuItem name="sendmsg">
    留言
     </MenuItem>
-    <MenuItem name="aboutus">
-     关于我们
-    </MenuItem>
+    <Submenu name="about">
+      <template slot="title">
+        关于我们
+      </template>
+        <MenuItem name="aboutus">关于我们</MenuItem>
+        <MenuItem name="team">管理团队</MenuItem>
+        <MenuItem name="commit">科学委员会</MenuItem>
+        <MenuItem name="dynamics">公司动态</MenuItem>
+        <MenuItem name="joinus">加入我们</MenuItem>
+        <MenuItem name="contachus">联系我们</MenuItem>
+      </Submenu>
     <MenuItem name="login" class="login">
   登录
     </MenuItem>
@@ -99,13 +107,21 @@
   .title .ivu-menu-light{
     background: none;
   }
-.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu{
+  .title .ivu-select-dropdown{
+    background-color: rgba(12, 23, 43, 0.46);
+  }
+.title  .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item,.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu{
   color:white;
   border-bottom: 0;
   transition: all .5s linear;
 }
-.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item-active, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item:hover, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu-active, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu:hover{
+.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item-active,.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item:hover, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu-active, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu:hover{
   color: #E02D39;
   border-bottom: 2px solid #E02D39;
+
 }
+  .title .ivu-menu-horizontal .ivu-menu-submenu .ivu-select-dropdown .ivu-menu-item-selected,.title .ivu-menu-horizontal .ivu-menu-submenu .ivu-select-dropdown .ivu-menu-item-selected:hover{
+    background-color:rgba(12, 23, 43, 0.46) ;
+    color: #E02D39;
+  }
 </style>
