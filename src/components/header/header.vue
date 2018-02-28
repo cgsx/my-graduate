@@ -39,7 +39,7 @@
           登录
       </span>
     <span class="search ">
-        <i class="iconfont icon-sousuo"></i>
+        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
       </span>
   </div>
   <Modal
@@ -48,43 +48,89 @@
     :mask-closable="false"
   class="loginModal"
     width="300">
+
     <p class="inputMSg">
-      <Input v-model="username">
-      <span slot="prepend">用户名：</span>
+      <Input v-model="username" placeholder="请输入电话">
       </Input>
     </p>
     <p class="inputMSg">
-      <Input v-model="pwd">
-      <span slot="prepend">密码：</span>
+      <Input v-model="pwd" placeholder="请输入密码">
       </Input>
     </p>
-    <p class="inputMSg">
-      <Input v-model="msg">
-      <span slot="prepend">验证码：</span>
+    <p class="inputMSg" >
+      <Input v-model="msg" placeholder="请输入验证码">
       <span slot="append">验证码</span>
       </Input>
     </p>
     <p slot="footer">
-
+      <Button type="primary" @click="loginIn">登录</Button>
+      <div>
+      <span class="resetPwd cursor" @click="rest">忘记密码？</span>
+      <span class="register cursor" @click="regis">立即注册</span>
+  </div>
     </p>
   </Modal>
   <Modal
     title="注册"
     v-model="register"
     :mask-closable="false"
+    class="loginModal"
   width="300">
-    <p>Content of dialog</p>
-    <p>Content of dialog</p>
-    <p>Content of dialog</p>
+    <p class="inputMSg">
+      <Input v-model="username" placeholder="请输入姓名">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="pwd" placeholder="请输入电话">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请输入邮箱">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请输入公司名称">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请输入密码">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请确认密码">
+      </Input>
+    </p>
+    <p slot="footer">
+      <Button type="primary" @click="doRegister">注册</Button>
+
+    </p>
   </Modal>
   <Modal
     title="重置密码"
     v-model="restpwd"
     :mask-closable="false"
+    class="loginModal"
     width="300">
-    <p>Content of dialog</p>
-    <p>Content of dialog</p>
-    <p>Content of dialog</p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请输入电话">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请输入旧密码">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请输入新密码">
+      </Input>
+    </p>
+    <p class="inputMSg">
+      <Input v-model="msg" placeholder="请确认新密码是否匹配">
+      </Input>
+    </p>
+    <p slot="footer">
+      <Button type="primary" @click="doReset">更改</Button>
+
+    </p>
   </Modal>
 </div>
 </template>
@@ -106,11 +152,55 @@
       jumpToPage(route){
           var self=this;
           self.$router.push({name:route})
+      },
+      loginIn(){//登录模态框
+          var self=this;
+
+          self.login=false;
+      },
+      regis(){//注册模态框
+          var self=this;
+        self.login=false;
+        self.register=true;
+      },
+      doRegister(){//注册
+          this.$Message.info("注册成功")
+      },
+      rest(){//修改密码模态框
+          var self=this;
+          self.login=false;
+          self.restpwd=true;
+      },
+      doReset(){//修改密码
+        this.$Message.info("修改成功");
+
       }
     }
   }
 </script>
 <style >
+  .loginModal input::-webkit-input-placeholder{
+    color: white;opacity:1;
+  }
+  .loginModal input{
+    background: none;
+    color: white;
+  }
+  .register{
+    display: block;
+    text-align: left;
+float: left;
+    padding-left: 5px;
+    line-height: 50px;
+  }
+  .resetPwd{
+    display: block;
+    text-align: right;
+    line-height: 50px;
+    padding-right: 5px;
+
+float: right;
+  }
   .inputMSg{
   height: 50px;
   }
@@ -130,7 +220,16 @@
     text-align: center;
   }
   .loginModal .ivu-modal-footer{
+    text-align: center;
+  }
+  .loginModal .ivu-modal-footer{
     border-top: none;
+  }
+  .loginModal .ivu-btn-ghost{
+    background: white;
+  }
+  .loginModal .ivu-btn{
+    width: 100%;
   }
   .loginModal  .ivu-modal-header .ivu-modal-header-inner{
     color: white;
@@ -194,7 +293,7 @@
     background: none;
   }
   .title .ivu-select-dropdown{
-    background-color: rgba(12, 23, 43, 0.46);
+    background-color: rgba(12, 23, 43, 0.6);
   }
 .title  .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item,.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu{
   color:white;
