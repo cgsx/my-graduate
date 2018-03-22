@@ -13,7 +13,6 @@ import $ from 'jquery'
 promise.polyfill();//axios兼容ie
 import axios from 'axios'
 Vue.prototype.$http = axios;
-
 Vue.use(iView);
 Vue.config.productionTip = false
 

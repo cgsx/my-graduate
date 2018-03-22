@@ -1,4 +1,4 @@
-<template>
+*<template>
 <div class="title">
   <Menu mode="horizontal"  active-name="1" @on-select="jumpToPage" class="titleone">
     <div class="layout-logo">
@@ -7,12 +7,24 @@
     <MenuItem name="index">
       首页
     </MenuItem>
-    <MenuItem name="product" class="pro">
-     产品
-    </MenuItem>
-    <MenuItem name="solution">
-     解决方案
-    </MenuItem>
+
+    <Submenu name="product">
+      <template slot="title">
+        产品
+      </template>
+      <MenuGroup :title="key" v-for="(item,key) in prolist" :key="key">
+        <MenuItem :name="JSON.stringify({'product':'product','uuid':pro.uuid})" v-for="pro in item" :key="pro.uuid">{{pro.name}}</MenuItem>
+      </MenuGroup>
+    </Submenu>
+
+    <Submenu name="solution">
+      <template slot="title">
+        解决方案
+      </template>
+
+        <MenuItem :name="JSON.stringify({'product':'solution','uuid':item.uuid})" v-for="item in solutionList" :key="item.uuid">{{item.group}}</MenuItem>
+
+    </Submenu>
     <MenuItem name="example">
      案例
     </MenuItem>
@@ -35,31 +47,35 @@
       </Submenu>
   </Menu>
   <div class="searchAndLogin">
-      <span class="login" @click="login=true">
+      <span class="login" @click="Login=true" v-if="username==''">
           登录
       </span>
-    <span class="search ">
-        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+    <span  class="login" v-if="username!=''" @click="loginOut">注销</span>
+    <span class="search "  v-if="username==''">
+       未登录
+      </span>
+    <span class="search "  v-if="username!=''">
+      {{username}}
       </span>
   </div>
   <Modal
     title="登录"
-    v-model="login"
+    v-model="Login"
     :mask-closable="false"
   class="loginModal"
     width="300">
 
     <p class="inputMSg">
-      <Input v-model="username" placeholder="请输入电话">
+      <Input v-model="dologin.uname" placeholder="请输入用户名">
       </Input>
     </p>
     <p class="inputMSg">
-      <Input v-model="pwd" placeholder="请输入密码">
+      <Input v-model="dologin.upwd" placeholder="请输入密码" type="password">
       </Input>
     </p>
     <p class="inputMSg" >
-      <Input v-model="msg" placeholder="请输入验证码">
-      <span slot="append">验证码</span>
+      <Input v-model="dologin.vcode" placeholder="请输入验证码" >
+      <span slot="append"><img class="cursor" src="http://localhost:8080/my_graduate/conmon/showSmg.php"  onclick="this.src='http://localhost:8080/my_graduate/conmon/showSmg.php?'+new Date().getTime();" alt=""></span>
       </Input>
     </p>
     <p slot="footer">
@@ -77,28 +93,29 @@
     class="loginModal"
   width="300">
     <p class="inputMSg">
-      <Input v-model="username" placeholder="请输入姓名">
+      <Input v-model="registerList.uname" placeholder="请输入姓名">
       </Input>
     </p>
     <p class="inputMSg">
-      <Input v-model="pwd" placeholder="请输入电话">
+      <Input v-model="registerList.upwd" placeholder="请输入密码" type="password">
       </Input>
     </p>
     <p class="inputMSg">
-      <Input v-model="msg" placeholder="请输入邮箱">
+      <Input v-model="sureUpwd" placeholder="请确认密码"type="password">
+      </Input>
+    <p class="inputMSg">
+      <Input v-model="registerList.phone" placeholder="请输入电话">
       </Input>
     </p>
     <p class="inputMSg">
-      <Input v-model="msg" placeholder="请输入公司名称">
+      <Input v-model="registerList.email" placeholder="请输入邮箱">
       </Input>
     </p>
     <p class="inputMSg">
-      <Input v-model="msg" placeholder="请输入密码">
+      <Input v-model="registerList.company_name" placeholder="请输入公司名称">
       </Input>
     </p>
-    <p class="inputMSg">
-      <Input v-model="msg" placeholder="请确认密码">
-      </Input>
+
     </p>
     <p slot="footer">
       <Button type="primary" @click="doRegister">注册</Button>
@@ -139,32 +156,109 @@
       name:'headers',
     data(){
           return {
-            login:false,
+              username:'',
+            Login:false,
             register:false,
             restpwd:false,
-            username:'',
-            pwd:'',
-            msg:''
+            sureUpwd:'',
+            msg:'',
+            prolist:[],//产品列表
+            solutionList:[],//解决方案列表
+          registerList:{
+            uname:'',
+            upwd:'',
+            phone:'',
+            email:'',
+            company_name:''
+          },
+            dologin:{
+                uname:'',
+              upwd:'',
+              vcode:''
+            }
           }
     },
+    mounted:function () {
+        if(localStorage.getItem("userInfo")!=null){
+          this.username=JSON.parse(localStorage.getItem("userInfo"))[0].uname;
+//          console.log(JSON.parse(localStorage.getItem("userInfo")))
+        }
+      this.loadPro();
+        this.loadsolution();
+    }
+
+  ,
     methods:{
+
+      loadsolution(){
+          var self=this;
+        self.$http.get("/mg_solution/mg_solution.php").then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+        self.solutionList=m.data.data;
+        })
+      },      loadPro(){
+          var self=this;
+        self.$http.get("/mg_pro/prolist.php").then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+        self.prolist=m.data.data;
+        })
+      },
+//        注销登录
+      loginOut(){
+        localStorage.clear();
+        this.username='';
+      },
 //        跳转页面
       jumpToPage(route){
           var self=this;
-          self.$router.push({name:route})
+if(route.indexOf('{')==-1){
+  self.$router.push({name:route});
+}else{
+  var routers=JSON.parse(route);
+  self.$router.push({name:routers.product,query:{uuid:routers.uuid}});
+}
+
       },
       loginIn(){//登录模态框
           var self=this;
+        self.$http.post("/mg_login/login.php",self.dologin).then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+          localStorage.setItem("userInfo",JSON.stringify(m.data.data));
+          self.$Message.info(m.data.msg);
+          self.Login=false;
+          self.username=JSON.parse(localStorage.getItem("userInfo"))[0  ].uname;
 
-          self.login=false;
+        })
+
       },
       regis(){//注册模态框
           var self=this;
+
         self.login=false;
         self.register=true;
       },
       doRegister(){//注册
-          this.$Message.info("注册成功")
+        var self=this;
+        self.$http.post("/mg_login/register.php",self.registerList).then((m)=>{
+          if(m.data.code!='100'){
+              self.$Message.info(m.data.msg);
+              return;
+          }
+          self.$Message.info(m.data.msg);
+          console.log(m.data.msg)
+          self.register=false;
+        }).catch(function () {
+          self.$Message.info("请求失败！");
+        })
       },
       rest(){//修改密码模态框
           var self=this;
@@ -179,6 +273,9 @@
   }
 </script>
 <style >
+  .inputMSg .ivu-input-group-append, .ivu-input-group-prepend{
+    padding: 0;
+  }
   .loginModal input::-webkit-input-placeholder{
     color: white;opacity:1;
   }
@@ -300,7 +397,7 @@ float: right;
   border-bottom: 0;
   transition: all .5s linear;
 }
-.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item-active,.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item:hover, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu-active, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu:hover{
+.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item-active,.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item:hover,.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu-active,.title .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu:hover{
   color: #E02D39;
   border-bottom: 2px solid #E02D39;
 
