@@ -8,17 +8,17 @@
       </p>
       <p><Button type="error" size="large">立即留言</Button></p>
     </div>
-    <Row class="userMsg">
+    <Row class="userMsg" v-for="item in dataList">
       <Col span="1" offset="2">
-            <Avatar>USER</Avatar>
+            <Avatar>{{item.uname}}</Avatar>
       </Col >
       <Col span="2">
-      <h3 class="info">username</h3>
-      <p>2017.1.1.1</p>
+      <h3 class="info">{{item.uname}}</h3>
+      <p>{{item.time}}</p>
       </Col>
       <Col span="17">
       <h3 class="info">留言信息</h3>
-<p>asddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p>
+<p>{{item.msg}}</p>
       </Col>
     </Row>
     </div>
@@ -28,7 +28,20 @@
     name:'sendmsg',
     data(){
       return {
-
+        dataList:[]
+      }
+    },mounted(){
+      this.loadList();
+    },methods:{
+      loadList(){
+        var self=this;
+        self.$http.post("mg_word/mg_word.php").then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+          self.dataList=m.data.data;
+        })
       }
     }
   }

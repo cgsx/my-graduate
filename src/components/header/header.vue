@@ -40,10 +40,8 @@
       </template>
         <MenuItem name="aboutus">关于我们</MenuItem>
         <MenuItem name="team">管理团队</MenuItem>
-        <MenuItem name="commit">科学委员会</MenuItem>
         <MenuItem name="dynamics">公司动态</MenuItem>
         <MenuItem name="joinus">加入我们</MenuItem>
-        <MenuItem name="contachus">联系我们</MenuItem>
       </Submenu>
   </Menu>
   <div class="searchAndLogin">

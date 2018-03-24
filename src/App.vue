@@ -13,11 +13,13 @@
   import Vue from 'vue'
 
   export default {
+
     name: 'app',
     mounted (){
       Vue.prototype.msg = this.$Message;
       Vue.prototype.spin = this.$Spin;
     },
+
    methods: {
 
    }

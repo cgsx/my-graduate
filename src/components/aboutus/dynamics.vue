@@ -6,68 +6,12 @@
 
     </div>
     <div class="dongtai">
-      <div class="companyDong">
+      <div class="companyDong" v-for="item in dataList">
         <img src="../../assets/images/726a0f70-7bbb-4f8b-b2cb-aa5e70a3d4ec.jpg" height="174" width="300"/>
         <div class="companyDongNer">
-          <p class="NerTitle">乐彩云与京东云以“云+AI” 开启消费者洞察3.0时代</p>
-          <p >2017/7/7 10.10</p>
-          <p >继去年12月，乐彩云与京东云达成战略合作关系，共同发布了“CloudMatrix云矩阵”战略后，近日，乐彩云高级副总裁、极速
-            洞察CEO左云鹏先生，受邀参加京东云生态伙伴沟通会，发表了《云矩阵：用云+AI开启消费者洞察3.0时代》的主题演讲。</p>
-        </div>
-
-      </div>
-    </div>  <div class="dongtai">
-      <div class="companyDong">
-        <img src="../../assets/images/726a0f70-7bbb-4f8b-b2cb-aa5e70a3d4ec.jpg" height="174" width="300"/>
-        <div class="companyDongNer">
-          <p class="NerTitle">乐彩云与京东云以“云+AI” 开启消费者洞察3.0时代</p>
-          <p >2017/7/7 10.10</p>
-          <p >继去年12月，乐彩云与京东云达成战略合作关系，共同发布了“CloudMatrix云矩阵”战略后，近日，乐彩云高级副总裁、极速
-            洞察CEO左云鹏先生，受邀参加京东云生态伙伴沟通会，发表了《云矩阵：用云+AI开启消费者洞察3.0时代》的主题演讲。</p>
-        </div>
-
-      </div>
-    </div>  <div class="dongtai">
-      <div class="companyDong">
-        <img src="../../assets/images/726a0f70-7bbb-4f8b-b2cb-aa5e70a3d4ec.jpg" height="174" width="300"/>
-        <div class="companyDongNer">
-          <p class="NerTitle">乐彩云与京东云以“云+AI” 开启消费者洞察3.0时代</p>
-          <p >2017/7/7 10.10</p>
-          <p >继去年12月，乐彩云与京东云达成战略合作关系，共同发布了“CloudMatrix云矩阵”战略后，近日，乐彩云高级副总裁、极速
-            洞察CEO左云鹏先生，受邀参加京东云生态伙伴沟通会，发表了《云矩阵：用云+AI开启消费者洞察3.0时代》的主题演讲。</p>
-        </div>
-
-      </div>
-    </div>  <div class="dongtai">
-      <div class="companyDong">
-        <img src="../../assets/images/726a0f70-7bbb-4f8b-b2cb-aa5e70a3d4ec.jpg" height="174" width="300"/>
-        <div class="companyDongNer">
-          <p class="NerTitle">乐彩云与京东云以“云+AI” 开启消费者洞察3.0时代</p>
-          <p >2017/7/7 10.10</p>
-          <p >继去年12月，乐彩云与京东云达成战略合作关系，共同发布了“CloudMatrix云矩阵”战略后，近日，乐彩云高级副总裁、极速
-            洞察CEO左云鹏先生，受邀参加京东云生态伙伴沟通会，发表了《云矩阵：用云+AI开启消费者洞察3.0时代》的主题演讲。</p>
-        </div>
-
-      </div>
-    </div>  <div class="dongtai">
-      <div class="companyDong">
-        <img src="../../assets/images/726a0f70-7bbb-4f8b-b2cb-aa5e70a3d4ec.jpg" height="174" width="300"/>
-        <div class="companyDongNer">
-          <p class="NerTitle">乐彩云与京东云以“云+AI” 开启消费者洞察3.0时代</p>
-          <p >2017/7/7 10.10</p>
-          <p >继去年12月，乐彩云与京东云达成战略合作关系，共同发布了“CloudMatrix云矩阵”战略后，近日，乐彩云高级副总裁、极速
-            洞察CEO左云鹏先生，受邀参加京东云生态伙伴沟通会，发表了《云矩阵：用云+AI开启消费者洞察3.0时代》的主题演讲。</p>
-        </div>
-
-      </div>
-    </div>  <div class="dongtai">
-      <div class="companyDong">
-        <img src="../../assets/images/726a0f70-7bbb-4f8b-b2cb-aa5e70a3d4ec.jpg" height="174" width="300"/>
-        <div class="companyDongNer">
-          <p class="NerTitle">乐彩云与京东云以“云+AI” 开启消费者洞察3.0时代</p>
-          <p >2017/7/7 10.10</p>
-          <p >继去年12月，乐彩云与京东云达成战略合作关系，共同发布了“CloudMatrix云矩阵”战略后，近日，乐彩云高级副总裁、极速
-            洞察CEO左云鹏先生，受邀参加京东云生态伙伴沟通会，发表了《云矩阵：用云+AI开启消费者洞察3.0时代》的主题演讲。</p>
+          <p class="NerTitle">{{item.title}}</p>
+          <p >{{item.time}}</p>
+          <p >{{item.description}}</p>
         </div>
 
       </div>
@@ -79,7 +23,20 @@
     name:'product',
     data(){
       return {
-
+        dataList:[],//数据报告列表
+      }
+    },mounted(){
+      this.loadList();
+    },methods:{
+      loadList(){
+        var self=this;
+        self.$http.post("mg_trends/mg_trends.php").then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+          self.dataList=m.data.data;
+        })
       }
     }
   }

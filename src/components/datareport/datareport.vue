@@ -5,31 +5,12 @@
       <h1>数据报告</h1>
     </div>
     <div class="dataReport clearfix">
-        <div class="card">
+        <div class="card" v-for="item in dataList">
           <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
-          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
-          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
+          <p class="cardTitle">{{item.name}}</p>
+          <p>{{item.description}}</p>
         </div>
-        <div class="card">
-          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
-          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
-          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
-        </div>
-        <div class="card">
-          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
-          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
-          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
-        </div>
-        <div class="card">
-          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
-          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
-          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
-        </div>
-      <div class="card">
-          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
-          <p class="cardTitle">2017年12月互联网金融品牌舆情报告</p>
-          <p>本报告研究中国互联网金融品牌舆情发生发展规律，为互金品牌行业定位、舆情危机应对提供依据</p>
-        </div>
+
     </div>
     </div>
 </template>
@@ -38,7 +19,20 @@
     name:'product',
     data(){
       return {
-
+      dataList:[],//数据报告列表
+      }
+    },mounted(){
+        this.loadList();
+    },methods:{
+      loadList(){
+          var self=this;
+        self.$http.post("mg_data/mg_data.php").then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+          self.dataList=m.data.data;
+        })
       }
     }
   }

@@ -5,13 +5,13 @@
       <h1>管理团队</h1>
 
     </div>
-    <div class="guan clearfix">
-        <div class="person cursor" @click="modal3=true">
+    <div class="guan clearfix" >
+        <div class="person cursor" @click="openDetail(item)" v-for="item in dataList" :key="item.uuid">
           <p class="personImg">
             <img src="../../assets/images/guan1.png" />
           </p>
-          <p>苏萌</p>
-          <p>董事长兼CEO</p>
+          <p>{{item.name}}</p>
+          <p>{{item.dept}}</p>
         </div>
     </div>
     <Modal v-model="modal3">
@@ -20,15 +20,11 @@
          <img src="../../assets/images/guan1.png" />
       </p>
       <p slot="footer">
-        <h3>教育背景：</h3>
-        <p> 美国康奈尔大学 营销模型专业博士</p>
-        <h3>      工作经历：</h3>
-        <p>      国家“千人计划”专家、中关村创业领军人才；</p>
-        <p>     北京大学国家发展研究院 特聘教授；</p>
-        <p>      北京大学光华管理学院 研究教授；</p>
-        <p>     多篇论文发表于国际顶尖学术期刊，国家自然科学基金重点项目获得者；</p>
-        <p>          前北京大学光华管理学院副系主任、博士生导师；</p>
-        <p>          2017 年世界互联网大会 “中国大数据领军人物”。</p>
+        <h3>{{detail.back}}</h3>
+        <p> {{detail.backdetail}}</p>
+        <h3>     {{detail.workhis}}</h3>
+        <p v-for="item in detail.workhisList">   {{item.des}}</p>
+
       </p>
     </Modal>
   </div>
@@ -38,7 +34,29 @@
     name:'product',
     data(){
       return {
-        modal3:false,
+        dataList:[],
+        detail:{},
+        modal3:false
+      }
+    },mounted(){
+      this.loadList();
+    },methods:{
+      loadList(){
+        var self=this;
+        self.$http.post("mg_manner/mg_manner.php").then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+          self.dataList=m.data.data;
+          console.log(self.dataList)
+        })
+      },
+      openDetail(item){
+          var self=this;
+          console.log(item);
+          self.detail=item;
+          self.modal3=true;
       }
     }
   }

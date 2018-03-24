@@ -4,16 +4,19 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import iView from 'iview';
+import Vuex from  'vuex'
 import 'iview/dist/styles/iview.css';
 import './assets/font/iconfont.css'//图标
 import './assets/css/common.css'//公共的css
 import './assets/common/reseteAjax'//重写ajax
+import store from  './assets/common/store.js'
 import promise from 'es6-promise'
 import $ from 'jquery'
 promise.polyfill();//axios兼容ie
 import axios from 'axios'
 Vue.prototype.$http = axios;
 Vue.use(iView);
+Vue.use(Vuex);
 Vue.config.productionTip = false
 
 
@@ -45,6 +48,7 @@ Vue.filter('trunc', function(value,num) {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

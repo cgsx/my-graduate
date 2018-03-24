@@ -8,80 +8,32 @@
       </p>
     </div>
  <div class="exampleNav">
-   <Menu mode="horizontal" :theme="theme1" active-name="1">
-     <MenuItem name="1">
-       全部
-     </MenuItem>
-     <MenuItem name="2">
-       公共事务
-     </MenuItem>
-       <MenuItem name="3">
-       媒体报业
+   <Menu mode="horizontal" :theme="theme1" active-name="公共事务" @on-select="choseActive">
+
+     <MenuItem :name="JSON.stringify(item)" v-for="(item,key) in examList" :key="key">
+       {{key}}
      </MenuItem>
 
-     <MenuItem name="4">
-       金融
-     </MenuItem>
-     <MenuItem name="5">
-       制造
-     </MenuItem>
-     <MenuItem name="6">
-       零售快消
-     </MenuItem>
-     <MenuItem name="7">
-       其他
-     </MenuItem>
    </Menu>
  </div>
     <div class="exampleDetail clearfix">
-      <div class="exampleOne " >
+      <div class="exampleOne " v-for="item in exampleList" >
         <span class="circle clearfix">
         <img src="../../assets/images/6e43db13-3e6e-4096-ba82-f1e034b47be0.png" />
         </span>
         <div class="exampleNer clearfix">
                <p class="exampleNerTitle">
-        某大型国有银行大数据营销案例
+        {{item.name}}
               </p>
           <p>
-            随着互联网金融对传统银行业务的不断冲击，银行业变革需求迫切，做为互联网+金融的先锋，某大型国有银行早已布局了银行电商平台
+            {{            item.description}}
           </p>
           <p class="btn">
             了解更多
           </p>
         </div>
       </div>
-      <div class="exampleOne " >
-        <span class="circle clearfix">
-        <img src="../../assets/images/6e43db13-3e6e-4096-ba82-f1e034b47be0.png" />
-        </span>
-        <div class="exampleNer clearfix">
-               <p class="exampleNerTitle">
-        某大型国有银行大数据营销案例
-              </p>
-          <p>
-            随着互联网金融对传统银行业务的不断冲击，银行业变革需求迫切，做为互联网+金融的先锋，某大型国有银行早已布局了银行电商平台
-          </p>
-          <p class="btn">
-            了解更多
-          </p>
-        </div>
-      </div>
-      <div class="exampleOne " >
-        <span class="circle clearfix">
-        <img src="../../assets/images/6e43db13-3e6e-4096-ba82-f1e034b47be0.png" />
-        </span>
-        <div class="exampleNer clearfix">
-               <p class="exampleNerTitle">
-        某大型国有银行大数据营销案例
-              </p>
-          <p>
-            随着互联网金融对传统银行业务的不断冲击，银行业变革需求迫切，做为互联网+金融的先锋，某大型国有银行早已布局了银行电商平台
-          </p>
-          <p class="btn">
-            了解更多
-          </p>
-        </div>
-      </div>
+
     </div>
     </div>
 </template>
@@ -90,7 +42,30 @@
     name:'product',
     data(){
       return {
-        theme1: 'light'
+        theme1: 'light',
+        examList:{},//案例列表
+        exampleList:[]//exampleLIst
+      }
+    },mounted(){
+        this.loadDefauult();
+    },methods:{
+      choseActive(name){
+          var self=this;
+          var names=JSON.parse(name);
+          self.exampleList=names;
+
+      },
+      loadDefauult(){
+          var self=this;
+        self.$http.post("mg_exam/examlist.php").then((m)=>{
+          if(m.data.code!='100'){
+            self.$Message.info(m.data.msg);
+            return false;
+          }
+          self.examList=m.data.data;
+          self.exampleList=self.examList.公共事务;
+
+        })
       }
     }
   }

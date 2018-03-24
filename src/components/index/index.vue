@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>
-      <video src="../../assets/images/banner.mp4" width="100%" loop autoplay></video>
+      <video :src="imgCommon+'/conmon/showImg.php?imgid=1'" width="100%" loop autoplay></video>
     </p>
    <Row>
      <Col span="24" class="productTitle ">
@@ -12,61 +12,16 @@
    </Row>
     <Row>
      <Col span="20" push="2" class="fle mb30">
-        <div class="decision ">
-          <img src="../../assets/images/0dd34c5c-078a-4edc-a983-af8554dcb333.png" />
+        <div class="decision " v-for="item in list.行业智能决策产品">
+          <img src="http://localhost:8080/my_graduate/conmon/showImg.php?imgid=2" />
           <h3>
-            DeepGovernor <br>
-            智能政府决策系统
+              {{item.name}}
           </h3>
           <p>
-            基于复杂决策模型，进行态势感知、预测分析、仿真模拟等，实现对决策业务事前判断、事中控制、事后反馈的全局智能支持系统。
-          </p>
-        </div>      <div class="decision ">
-          <img src="../../assets/images/0dd34c5c-078a-4edc-a983-af8554dcb333.png" />
-          <h3>
-            DeepGovernor <br>
-            智能政府决策系统
-          </h3>
-          <p>
-            基于复杂决策模型，进行态势感知、预测分析、仿真模拟等，实现对决策业务事前判断、事中控制、事后反馈的全局智能支持系统。
-          </p>
-        </div>      <div class="decision ">
-          <img src="../../assets/images/0dd34c5c-078a-4edc-a983-af8554dcb333.png" />
-          <h3>
-            DeepGovernor <br>
-            智能政府决策系统
-          </h3>
-          <p>
-            基于复杂决策模型，进行态势感知、预测分析、仿真模拟等，实现对决策业务事前判断、事中控制、事后反馈的全局智能支持系统。
-          </p>
-        </div>      <div class="decision ">
-          <img src="../../assets/images/0dd34c5c-078a-4edc-a983-af8554dcb333.png" />
-          <h3>
-            DeepGovernor <br>
-            智能政府决策系统
-          </h3>
-          <p>
-            基于复杂决策模型，进行态势感知、预测分析、仿真模拟等，实现对决策业务事前判断、事中控制、事后反馈的全局智能支持系统。
-          </p>
-        </div>      <div class="decision ">
-          <img src="../../assets/images/0dd34c5c-078a-4edc-a983-af8554dcb333.png" />
-          <h3>
-            DeepGovernor <br>
-            智能政府决策系统
-          </h3>
-          <p>
-            基于复杂决策模型，进行态势感知、预测分析、仿真模拟等，实现对决策业务事前判断、事中控制、事后反馈的全局智能支持系统。
-          </p>
-        </div>      <div class="decision ">
-          <img src="../../assets/images/0dd34c5c-078a-4edc-a983-af8554dcb333.png" />
-          <h3>
-            DeepGovernor <br>
-            智能政府决策系统
-          </h3>
-          <p>
-            测分析、仿真模拟等，实现对决策业务事前判断、事中控制、事后反馈的全局智能支持系统。
+            {{item.description}}
           </p>
         </div>
+
      </Col>
    </Row>
     <div class="bg_f5">
@@ -80,10 +35,10 @@
     <Row>
 
       <Col span="20" push="2" class="relize fle bg_f5">
-     <div class="decision">
+     <div class="decision" v-for="item in list.智能认知产品">
        <img src="../../assets/images/bbc2bd00-be45-4f94-8b54-7ccbcd3ef6a0.png" height="70" width="100"/>
-     <h3>智能交互式分析系统</h3>
-       <p>利用自然语言处理和语音识别技术，帮助企业进行智能数据提取、分析和可视化展示，智能引导企业数据分析的一站式数据管理工具。</p>
+     <h3>  {{item.name}}</h3>
+       <p> {{item.description}}</p>
      </div>
       </Col>
     </Row>
@@ -98,24 +53,9 @@
     </Row>
     <Row>
       <Col span="20" push="2" class="system fle ">
-      <div class="decision">
+      <div class="decision"  v-for="item in list.大数据操作系统">
         <img src="../../assets/images/36c25604-8f19-4a46-b86b-6b5543697a36.png" height="90" width="90"/>
-        <h3>分布式数据库 <br> KHan</h3>
-      </div>     <div class="decision">
-        <img src="../../assets/images/36c25604-8f19-4a46-b86b-6b5543697a36.png" height="90" width="90"/>
-        <h3>分布式数据库 <br> KHan</h3>
-      </div>     <div class="decision">
-        <img src="../../assets/images/36c25604-8f19-4a46-b86b-6b5543697a36.png" height="90" width="90"/>
-        <h3>分布式数据库 <br> KHan</h3>
-      </div>     <div class="decision">
-        <img src="../../assets/images/36c25604-8f19-4a46-b86b-6b5543697a36.png" height="90" width="90"/>
-        <h3>分布式数据库 <br> KHan</h3>
-      </div>     <div class="decision">
-        <img src="../../assets/images/36c25604-8f19-4a46-b86b-6b5543697a36.png" height="90" width="90"/>
-        <h3>分布式数据库 <br> KHan</h3>
-      </div>     <div class="decision">
-        <img src="../../assets/images/36c25604-8f19-4a46-b86b-6b5543697a36.png" height="90" width="90"/>
-        <h3>分布式数据库 <br> KHan</h3>
+        <h3> {{item.name}} </h3>
       </div>
       </Col>
     </Row>
@@ -193,7 +133,29 @@
   </template>
 <script>
 export default{
-
+data(){
+    return{
+      list:[],//首页
+      imgCommon:'',//图片请求绝对路劲前最
+    }
+},
+  mounted(){
+    this.loadIndex();
+    console.log(this.$store.state.imgCommon)
+    this.imgCommon=this.$store.state.imgCommon;
+  },methods:{
+    loadIndex(){
+        var self=this;
+      self.$http.get("/mg-index/mg_index.php").then((m)=>{
+        if(m.data.code!='100'){
+          self.$Message.info(m.data.msg);
+          return false;
+        }
+        self.list=m.data.data;
+        console.log(m.data.data)
+      })
+    }
+  }
 }
 </script>
 <style scoped>
