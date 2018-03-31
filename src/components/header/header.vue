@@ -1,6 +1,6 @@
 *<template>
 <div class="title">
-  <Menu mode="horizontal"  active-name="1" @on-select="jumpToPage" class="titleone">
+  <Menu mode="horizontal"  :active-name="activeName" @on-select="jumpToPage" class="titleone" ref="big">
     <div class="layout-logo">
       <img src="../../assets/images/logo.png" />
     </div>
@@ -154,6 +154,7 @@
       name:'headers',
     data(){
           return {
+            activeName:'index',
               username:'',
             Login:false,
             register:false,
@@ -179,8 +180,18 @@
     mounted:function () {
         if(localStorage.getItem("userInfo")!=null){
           this.username=JSON.parse(localStorage.getItem("userInfo"))[0].uname;
-//          console.log(JSON.parse(localStorage.getItem("userInfo")))
         }
+      this.$nextTick(function () {
+        if(this.$route.query.uuid==null){
+          this.activeName=this.$route.name;
+          this.$refs.big.updateActiveName();
+        }else{
+          this.activeName=JSON.stringify({product:this.$route.name,uuid:this.$route.query.uuid});
+          this.$refs.big.updateActiveName();
+          console.log(this.activeName)
+        }
+
+      })
       this.loadPro();
         this.loadsolution();
     }
@@ -219,7 +230,9 @@ if(route.indexOf('{')==-1){
   self.$router.push({name:route});
 }else{
   var routers=JSON.parse(route);
+  console.log('reload')
   self.$router.push({name:routers.product,query:{uuid:routers.uuid}});
+  document.location.reload();
 }
 
       },
@@ -252,7 +265,6 @@ if(route.indexOf('{')==-1){
               return;
           }
           self.$Message.info(m.data.msg);
-          console.log(m.data.msg)
           self.register=false;
         }).catch(function () {
           self.$Message.info("请求失败！");

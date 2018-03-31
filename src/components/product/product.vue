@@ -45,7 +45,7 @@
     </div>
     <div class="productMudele ">
       <p class="top">应用场景</p>
-      <Tabs value="name1">
+      <Tabs >
         <TabPane :label="item.detailtitle" :name="item.uuid"  v-for="item in proList.applist">
           {{item.detail}}
         </TabPane>
@@ -60,7 +60,7 @@
     name:'product',
     data(){
       return {
-        uuid:'',
+        uuid:this.$route.query.uuid,
         proList:''
       }
     },
@@ -69,12 +69,14 @@
         this.loadProList();
     },
    updated(){
-        this.uuid=this.$route.query.uuid;
-        console.log(this.uuid);
+//        this.uuid=this.$route.query.uuid;
+//        console.log(111)
+
    },
     watch:{
     uuid:function () {
-    console.log(this.uuid);
+        console.log(111)
+      this.loadProList();
   }
     },
     methods:{

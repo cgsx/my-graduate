@@ -2,7 +2,7 @@
   <div class="productTitle">
     <img src="../../assets/images/product.png"/>
     <div class="titleText">
-      <h1>{{solutionList.name}}</h1>
+      <h1>{{solutionList.group}}</h1>
       <p>{{solutionList.description}}</p>
       <p><Button type="error" size="large">立即咨询</Button></p>
     </div>
@@ -29,7 +29,7 @@
     </div>
     <div class="solutionModule">
       <p class="BjTitle">应用场景</p>
-      <Tabs value="name1">
+      <Tabs >
         <TabPane :label="item.detailtitle" :name="item.uuid"  v-for="item in solutionList.applist">
           {{item.detail}}
         </TabPane>

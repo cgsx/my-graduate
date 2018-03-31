@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>
-      <video :src="imgCommon+'/conmon/showImg.php?imgid=1'" width="100%" loop autoplay></video>
+      <video :src="imgCommon+'/conmon/showImg.php?uuid=1&type=1'" width="100%" loop autoplay></video>
     </p>
    <Row>
      <Col span="24" class="productTitle ">
@@ -13,7 +13,7 @@
     <Row>
      <Col span="20" push="2" class="fle mb30">
         <div class="decision " v-for="item in list.行业智能决策产品">
-          <img src="http://localhost:8080/my_graduate/conmon/showImg.php?imgid=2" />
+          <img :src="imgCommon+'/conmon/showImg.php?uuid=2&type=1'" />
           <h3>
               {{item.name}}
           </h3>
