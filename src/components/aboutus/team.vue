@@ -74,7 +74,9 @@
     margin: 20px auto;
   }
   .guan .person{
+    float: left;
     width: 220px;
+    margin-right: 20px; ;
 
   }  .guan .person p img{
     width: 100%;

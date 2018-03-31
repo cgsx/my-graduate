@@ -71,61 +71,17 @@
       </Row>
       <Row>
         <Col span="20" push="2">
-        <div class="decision">
-          <h1>银行</h1>
+        <div class="decision" v-for="item in solutionList" :key="item.uuid">
+          <h1>{{item.group}}</h1>
           <div class="show">
-            <h1>银行</h1>
-            <Button type="ghost" class="detail">了解详情</Button>
-            <img src="../../assets/images/publicdown_img.png"/>
-            <div class="bg"></div>
-          </div>
-          <img src="../../assets/images/afe61011-b050-40cf-be25-7ac92a01c3bf.png"/>
-        </div>      <div class="decision">
-          <h1>银行</h1>
-          <div class="show">
-            <h1>银行</h1>
-            <Button type="ghost" class="detail">了解详情</Button>
-            <img src="../../assets/images/publicdown_img.png"/>
-            <div class="bg"></div>
-          </div>
-          <img src="../../assets/images/afe61011-b050-40cf-be25-7ac92a01c3bf.png"/>
-        </div>      <div class="decision">
-          <h1>银行</h1>
-          <div class="show">
-            <h1>银行</h1>
-            <Button type="ghost" class="detail">了解详情</Button>
-            <img src="../../assets/images/publicdown_img.png"/>
-            <div class="bg"></div>
-          </div>
-          <img src="../../assets/images/afe61011-b050-40cf-be25-7ac92a01c3bf.png"/>
-        </div>      <div class="decision">
-          <h1>银行</h1>
-          <div class="show">
-            <h1>银行</h1>
-            <Button type="ghost" class="detail">了解详情</Button>
-            <img src="../../assets/images/publicdown_img.png"/>
-            <div class="bg"></div>
-          </div>
-          <img src="../../assets/images/afe61011-b050-40cf-be25-7ac92a01c3bf.png"/>
-        </div>      <div class="decision">
-          <h1>银行</h1>
-          <div class="show">
-            <h1>银行</h1>
-            <Button type="ghost" class="detail">了解详情</Button>
-            <img src="../../assets/images/publicdown_img.png"/>
-            <div class="bg"></div>
-          </div>
-          <img src="../../assets/images/afe61011-b050-40cf-be25-7ac92a01c3bf.png"/>
-        </div>      <div class="decision">
-          <h1>银行</h1>
-          <div class="show">
-            <h1>银行</h1>
+            <h1>{{item.group}}</h1>
             <Button type="ghost" class="detail">了解详情</Button>
             <img src="../../assets/images/publicdown_img.png"/>
             <div class="bg"></div>
           </div>
           <img src="../../assets/images/afe61011-b050-40cf-be25-7ac92a01c3bf.png"/>
         </div>
+
         </Col>
       </Row>
     </div>
@@ -136,6 +92,7 @@ export default{
 data(){
     return{
       list:[],//首页
+      solutionList:[],
       imgCommon:'',//图片请求绝对路劲前最
     }
 },
@@ -152,7 +109,7 @@ data(){
           return false;
         }
         self.list=m.data.data;
-        console.log(m.data.data)
+        self.solutionList=self.list[0];
       })
     }
   }
