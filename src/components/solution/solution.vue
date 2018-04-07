@@ -4,7 +4,7 @@
     <div class="titleText">
       <h1>{{solutionList.group}}</h1>
       <p>{{solutionList.description}}</p>
-      <p><Button type="error" size="large">立即咨询</Button></p>
+      <p><Button type="error" size="large" @click="openLeave">立即咨询</Button></p>
     </div>
     <div class="solutionModule" v-for="item in solutionList.funlist">
       <p class="BjTitle">
@@ -23,14 +23,14 @@
 {{item.detail}}
 </span>
         <span class="GsImg">
-
-      <img src="../../assets/images/fc176b01-4809-4dba-b85a-0c9b1033f223.png" /></span>
+                  <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=4'" alt="">
+        </span>
       </p>
     </div>
     <div class="solutionModule">
       <p class="BjTitle">应用场景</p>
       <Tabs >
-        <TabPane :label="item.detailtitle" :name="item.uuid"  v-for="item in solutionList.applist">
+        <TabPane :label="item.detailtitle" :name="item.uuid"  v-for="item in solutionList.applist" :key="item.uuid">
           {{item.detail}}
         </TabPane>
       </Tabs>
@@ -39,7 +39,8 @@
       <p class="BjTitle">方案优势</p>
       <div class="yS clearfix"  v-for="item in solutionList.advenlist">
         <div>
-          <img src="../../assets/images/3cee0044-4d39-4c11-ae1e-e7ac83cf7140.png" />
+          <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=5'" alt="">
+
         </div>
         <div class="ysRight">
           <p class="YsTitle">
@@ -51,7 +52,24 @@
            </p>
         </div>
       </div>
+      <Modal
+        v-model="modal1"
+        title="咨询"
+      >
+        <p>
+        <Form ref="formItem" :model="formItem" :rules="formItemRule" :label-width="80">
+          <FormItem label="需求提交" prop="msg">
+            <Input v-model="formItem.msg" type="textarea" placeholder="请输入需求"></Input>
+          </FormItem>
+        </Form>
+        </p>
+        <p slot="footer">
+          <Button type="primary" @click="leaveMsg">确定</Button>
+          <Button type="ghost" @click="modal1=false">取消</Button>
+        </p>
+      </Modal>
     </div>
+
   </div>
 </template>
 <script>
@@ -60,7 +78,14 @@
     data(){
       return {
         uuid:'',
-        solutionList:[]
+        solutionList:[] ,
+        modal1:false,
+        formItem:{
+          msg:''
+        },
+        formItemRule:{
+            msg:[{required:true,message:'不能为空'}]
+        }
       }
     },
     mounted(){
@@ -71,8 +96,45 @@
       console.log(this.uuid);
     },
     methods:{
+      openLeave(){
+        var self=this;
+        var name=JSON.parse(localStorage.getItem("userInfo"));
+        if(name!=null){
+          self.modal1=true;
+        }else{
+          self.$Message.info("请登录");
+        }
+      },
+      leaveMsg(){
+        var self=this;
+        var name=JSON.parse(localStorage.getItem("userInfo"));
+
+        if(name!=null){
+          self.formItem.userid=name[0].uuid;
+          self.$refs.formItem.validate((valid) => {
+            if (valid) {
+          self.$http.post("mg_zx/mg_work_insert.php",self.formItem).then((m)=>{
+            if(m.data.code!='100'){
+              self.$Message.info(m.data.msg);
+              return false;
+            }
+
+            self.modal1=false;
+          })
+            }else{
+          self.$Message.info("不通过");
+        }
+      })
+        }
+        else{
+          self.$Message.info("未登录，请登录！");
+        }
+
+
+      },
         loadSolutions(){
           var self=this;
+
           self.$http.post("mg_solution/detail.php",{uuid:self.uuid}).then((m)=>{
             if(m.data.code!='100'){
               self.$Message.info(m.data.msg);
@@ -80,6 +142,7 @@
             }
             self.solutionList=m.data.data;
           })
+
         }
     }
   }

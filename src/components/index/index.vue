@@ -12,8 +12,8 @@
    </Row>
     <Row>
      <Col span="20" push="2" class="fle mb30">
-        <div class="decision " v-for="item in list.行业智能决策产品">
-          <img :src="imgCommon+'/conmon/showImg.php?uuid=2&type=1'" />
+        <div class="decision " v-for="item in list.行业智能决策产品" @click="jumpToPro(item.uuid)">
+          <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=14'" alt="">
           <h3>
               {{item.name}}
           </h3>
@@ -35,7 +35,7 @@
     <Row>
 
       <Col span="20" push="2" class="relize fle bg_f5">
-     <div class="decision" v-for="item in list.智能认知产品">
+     <div class="decision" v-for="item in list.智能认知产品" @click="jumpToPro(item.uuid)">
        <img src="../../assets/images/bbc2bd00-be45-4f94-8b54-7ccbcd3ef6a0.png" height="70" width="100"/>
      <h3>  {{item.name}}</h3>
        <p> {{item.description}}</p>
@@ -53,7 +53,7 @@
     </Row>
     <Row>
       <Col span="20" push="2" class="system fle ">
-      <div class="decision"  v-for="item in list.大数据操作系统">
+      <div class="decision"  v-for="item in list.大数据操作系统" @click="jumpToPro(item.uuid)">
         <img src="../../assets/images/36c25604-8f19-4a46-b86b-6b5543697a36.png" height="90" width="90"/>
         <h3> {{item.name}} </h3>
       </div>
@@ -75,11 +75,12 @@
           <h1>{{item.group}}</h1>
           <div class="show">
             <h1>{{item.group}}</h1>
-            <Button type="ghost" class="detail">了解详情</Button>
+            <Button type="ghost" class="detail" @click.native="jump(item.uuid)">了解详情</Button>
             <img src="../../assets/images/publicdown_img.png"/>
             <div class="bg"></div>
           </div>
-          <img src="../../assets/images/afe61011-b050-40cf-be25-7ac92a01c3bf.png"/>
+          <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=13'" alt="">
+
         </div>
 
         </Col>
@@ -98,9 +99,15 @@ data(){
 },
   mounted(){
     this.loadIndex();
-    console.log(this.$store.state.imgCommon)
     this.imgCommon=this.$store.state.imgCommon;
   },methods:{
+    jump(uuid){
+        console.log(uuid);
+        this.$router.push({name:'solution',query:{uuid:uuid}});
+    },
+    jumpToPro(uuid){
+        this.$router.push({name:'product',query:{uuid:uuid}});
+    },
     loadIndex(){
         var self=this;
       self.$http.get("/mg-index/mg_index.php").then((m)=>{
@@ -232,8 +239,12 @@ display: none;
 }
 .solution .decision .detail{
 margin: 0 auto;
-  margin-top: 80px;
+position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -35px;
   color: white;
+  z-index: 100;
 }
 .solution .decision .show{
   position: absolute;

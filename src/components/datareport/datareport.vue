@@ -6,7 +6,8 @@
     </div>
     <div class="dataReport clearfix">
         <div class="card" v-for="item in dataList">
-          <img src="../../assets/images/dfd11d46-eab2-49c2-bac0-0a69d94d0494.png" />
+          <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=7'" alt="">
+
           <p class="cardTitle">{{item.name}}</p>
           <p>{{item.description}}</p>
         </div>

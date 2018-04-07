@@ -7,7 +7,8 @@
     </div>
     <div class="dongtai">
       <div class="companyDong" v-for="item in dataList">
-        <img src="../../assets/images/726a0f70-7bbb-4f8b-b2cb-aa5e70a3d4ec.jpg" height="174" width="300"/>
+        <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=11'" height="174" width="300" alt="">
+
         <div class="companyDongNer">
           <p class="NerTitle">{{item.title}}</p>
           <p >{{item.time}}</p>

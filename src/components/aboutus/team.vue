@@ -8,7 +8,8 @@
     <div class="guan clearfix" >
         <div class="person cursor" @click="openDetail(item)" v-for="item in dataList" :key="item.uuid">
           <p class="personImg">
-            <img src="../../assets/images/guan1.png" />
+            <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=10'" alt="">
+
           </p>
           <p>{{item.name}}</p>
           <p>{{item.dept}}</p>
@@ -17,7 +18,7 @@
     <Modal v-model="modal3">
       <p slot="header"></p>
       <p class="personDetail">
-         <img src="../../assets/images/guan1.png" />
+        <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+detail.uuid+'&type=10'" alt="">
       </p>
       <p slot="footer">
         <h3>{{detail.back}}</h3>

@@ -17,22 +17,7 @@
     <div class="joinCard">
       <h3 class="joinTitle">{{data2.title}}</h3>
 <p class="workText">{{data2.content}} </p>
-      <Carousel v-model="value1" loop>
-        <CarouselItem>
-          <div class="demo-carousel"><img src="../../assets/images/20160812150653_13226.jpg"/></div>
-        </CarouselItem>
-        <CarouselItem>
-          <div class="demo-carousel"><img src="../../assets/images/20160812150653_13226.jpg"/></div>
-        </CarouselItem>
-        <CarouselItem>
-          <div class="demo-carousel"><img src="../../assets/images/20160812150653_13226.jpg"/></div>
-        </CarouselItem>
-        <CarouselItem>
-          <div class="demo-carousel"><img src="../../assets/images/20160812150653_13226.jpg"/></div>
-        </CarouselItem>      <CarouselItem>
-          <div class="demo-carousel"><img src="../../assets/images/20160812150653_13226.jpg"/></div>
-        </CarouselItem>
-      </Carousel>
+
     </div>
     <div class="joinCard">
       <h3 class="joinTitle">{{data3.title}}</h3>

@@ -19,7 +19,7 @@
     <div class="exampleDetail clearfix">
       <div class="exampleOne " v-for="item in exampleList" >
         <span class="circle clearfix">
-        <img src="../../assets/images/6e43db13-3e6e-4096-ba82-f1e034b47be0.png" />
+                 <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=6'" alt="">
         </span>
         <div class="exampleNer clearfix">
                <p class="exampleNerTitle">
@@ -63,7 +63,7 @@
             return false;
           }
           self.examList=m.data.data;
-          self.exampleList=self.examList.公共事务;
+          self.exampleList=self.examList.金融;
 
         })
       }

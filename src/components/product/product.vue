@@ -5,9 +5,9 @@
       <div class="titleText">
     <h1>{{proList.name}}</h1>
     <p>{{proList.description}}</p>
-    <p><Button type="error" size="large">立即咨询</Button></p>
+    <p><Button type="error" size="large" @click="openLeave">立即咨询</Button></p>
   </div>
-    <div class="productMudele" v-for="item in proList.deslist">
+    <div class="productMudele" v-for="item in proList.deslist" :key="item.uuid">
       <p class="top">{{item.title}}</p>
       <p>
       {{item.detail}}
@@ -17,7 +17,8 @@
       <p class="top">产品功能</p>
     <div class="Gn" v-for="item in proList.funlist">
         <p>
-          <img src="../../assets/images/4cdd6021-4e85-4451-9327-a33c421566f2.png" />
+          <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=2'" alt="">
+
         </p>
       <p class="GnTitle">
         {{item.detailtitle}}
@@ -29,9 +30,10 @@
     </div>
     <div class="productMudele clearfix">
       <p class="top">产品优势</p>
-      <div class="yS clearfix" v-for="item in proList.advenlist">
-        <div>
-          <img src="../../assets/images/3cee0044-4d39-4c11-ae1e-e7ac83cf7140.png" />
+      <div class="yS clearfix" v-for="item in proList.advenlist" :key="item.uuid">
+        <div style="margin: 0 auto">
+          <img :src="$store.state.imgCommon+'/conmon/showImg.php?uuid='+item.uuid+'&type=3'" alt="">
+
         </div>
         <div class="ysRight">
           <p class="YsTitle">
@@ -46,13 +48,29 @@
     <div class="productMudele ">
       <p class="top">应用场景</p>
       <Tabs >
-        <TabPane :label="item.detailtitle" :name="item.uuid"  v-for="item in proList.applist">
+        <TabPane :label="item.detailtitle" :name="item.uuid"  v-for="item in proList.applist" :key="item.uuid">
           {{item.detail}}
         </TabPane>
       </Tabs>
 
       </div>
     </div>
+    <Modal
+      v-model="modal1"
+      title="咨询"
+    >
+      <p>
+      <Form ref="formItem" :model="formItem" :rules="formItemRule" :label-width="80">
+        <FormItem label="需求提交" prop="msg">
+          <Input v-model="formItem.msg" type="textarea" placeholder="请输入需求"></Input>
+        </FormItem>
+      </Form>
+      </p>
+      <p slot="footer">
+        <Button type="primary" @click="leaveMsg">确定</Button>
+        <Button type="ghost" @click="modal1=false">取消</Button>
+      </p>
+    </Modal>
   </div>
 </template>
 <script>
@@ -61,7 +79,14 @@
     data(){
       return {
         uuid:this.$route.query.uuid,
-        proList:''
+        proList:'',
+        modal1:false,
+        formItem:{
+          msg:''
+        },
+        formItemRule:{
+          msg:[{required:true,message:'不能为空'}]
+        }
       }
     },
     mounted(){
@@ -75,11 +100,47 @@
    },
     watch:{
     uuid:function () {
-        console.log(111)
+
       this.loadProList();
   }
     },
     methods:{
+      openLeave(){
+        var self=this;
+        var name=JSON.parse(localStorage.getItem("userInfo"));
+        if(name!=null){
+          self.modal1=true;
+        }else{
+          self.$Message.info("请登录");
+        }
+      },
+      leaveMsg(){
+        var self=this;
+        var name=JSON.parse(localStorage.getItem("userInfo"));
+
+        if(name!=null){
+          self.formItem.userid=name[0].uuid;
+          self.$refs.formItem.validate((valid) => {
+              if (valid) {
+          self.$http.post("mg_zx/mg_work_insert.php",self.formItem).then((m)=>{
+            if(m.data.code!='100'){
+              self.$Message.info(m.data.msg);
+              return false;
+            }
+
+            self.modal1=false;
+          })
+              }else{
+                self.$Message.info("不通过");
+              }
+          })
+        }
+        else{
+          self.$Message.info("未登录，请登录！");
+        }
+
+
+      },
         loadProList(){
           var self=this;
           self.$http.post("/mg_pro/prodetail.php",{uuid:self.uuid}).then((m)=>{
@@ -100,6 +161,9 @@
     margin-bottom: 10px;
     float:left;
   }
+  .yS img{
+    margin-left: 50px;
+  }
   .YsTitle{
     font-size: 20px;
     color: #000000;
@@ -112,18 +176,23 @@ padding-left: 50px;
   .productMudele .yS div{
     float: left;
   }
+.yS  img,.Gn img{
+    width:200px;
+    height: 100px;
+  }
  .productMudele .Gn{
     width: 48%;
    margin-right: 10px;
    margin-bottom: 10px;
     height: 350px;
-    background: #fffdef;
+    background: #e1e1e1;
    float:left;
   }
  .productMudele .Gn img{
    margin: 50px auto;
 
  }
+
  .productMudele .Gn p{
    text-align: center;
  }
